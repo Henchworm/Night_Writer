@@ -1,12 +1,8 @@
 class Reader
 
-
+  def read
     input_file = ARGV[0]
     characters = File.read(input_file)
+  end
 
-    new_file = ARGV[1]
-    File.open(new_file, 'w') do |file|
-       file.puts characters
-     end
-     puts "Created '#{new_file}' countaining #{characters.length} characters."
 end

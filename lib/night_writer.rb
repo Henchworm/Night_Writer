@@ -1,37 +1,30 @@
+require './lib/writer'
+require './lib/reader'
+
 class NightWriter
+  attr_reader :input,
+              :output
 
-
-  def reader
-    input_file = ARGV[0]
-    lines = File.readlines(input_file)
-    line_count = lines.size
-    text = lines.join
-    total_characters = text.length
-    puts "#{total_characters} characters"
+  def initialize
+    @input = ARGV[0]
+    @output = ARGV[1]
   end
+
+  def translate
+    characters = File.read(@input)
+    new_file = @output
+    File.open(new_file, 'w') do |file|
+     file.puts characters
+    end
+   puts "Created #{new_file} containing #{characters.length} characters."
+ end
+
+
+
 
 
 
 end
-
-
- # def self.input
- # total_characters = []
- # File.open(ARGV[0]).each do |line|
- #      total_characters << line
- #    end
- #    total_characters.count
- #  end
-
-# input = ARGV.first
-# File.readlines(input)
-# line_count = lines.size
-# text = lines.join
-# total_characters = text.length
-# puts "Read file with #{total_characters}"
-# end
-#ARGV1 will be used for output
-
-  #
-  # File.open(ARGV[0]).each do |line|
-  #     puts line
+NightWriter.new.translate
+ #method to call both the reader and writer methods and then do the translation within
+ #nightwriter class?

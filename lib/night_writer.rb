@@ -7,7 +7,9 @@ class NightWriter
               :output,
               :braille_alphabet,
               :reader,
-              :writer
+              :writer,
+              :alphabet,
+              :braille
 
   def initialize
     @braille_alphabet = BrailleAlphabet.new
@@ -18,59 +20,26 @@ class NightWriter
 
   def file_creator
     characters = @reader.read
-    @writer.write(characters)
+    braille = translate_to_braille(characters)
+    @writer.write(braille)
   end
 
- # def file_creator
- #    characters = File.read(@input)
- #    new_file = @output
- #    File.open(new_file, 'w') do |file|
- #     file.puts characters
- #    end
- #   puts "Created #{new_file} containing #{characters.length} characters."
- # end
-
- # def english_to_braille(character)
- #   @braille_alphabet[character]
- # end
-
-  # def translator
-  #   characters = File.read(@input)
-  #   new_file = @output
-  #     # if characters.include? letter
-  #     #   File.open(new_file, 'w') do |file|
-  #     #     file.puts braille_array
-  #     #   end
-  #     # end
-  #     # puts "Created #{new_file} containing #{characters.length} characters."
-  # end
-
-
-
-
-
-  # def file_creator
-  #    characters = File.read(@input)
-  #    new_file = @output
-  #    File.open(new_file, 'w') do |file|
-  #     file.puts characters
-  #    end
-  #   puts "Created #{new_file} containing #{characters.length} characters."
-  # end
-
-  # def english_to_braille(character)
-  #   @braille_alphabet[character]
-  # end
-
-
-
-
-
-
-
-
-
-
+  def translate_to_braille(characters)
+      characters.strip.downcase
+      braille_char = nil
+      @braille_alphabet.alphabet.each do |char_key, array|
+        if characters == char_key
+          braille_char = @braille_alphabet.alphabet[char_key]
+      end
+    end
+    braille_char
+  end
 
 end
+
+
+
+
+
+
 NightWriter.new.file_creator

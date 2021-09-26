@@ -5,11 +5,11 @@ class Writer
     @writer = ARGV[1]
   end
 
-  def write(characters)
+  def write(braille)
   File.open(@writer, 'w') do |file|
-     file.puts characters
+     file.puts braille
    end
-   puts "Created '#{@writer}' countaining #{characters.length} characters."
+   puts "Created '#{@writer}' countaining #{braille.length} characters."
  end
 
 end

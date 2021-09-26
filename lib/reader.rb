@@ -1,8 +1,12 @@
 class Reader
+  attr_reader :input
+
+  def initialize
+    @input = ARGV[0]
+  end
 
   def read
-    input_file = ARGV[0]
-    characters = File.read(input_file)
+    characters = File.new(@input).read
   end
 
 end

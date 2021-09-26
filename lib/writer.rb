@@ -1,11 +1,15 @@
 class Writer
+  attr_reader :writer
 
-  def write
-  new_file = ARGV[1]
-  File.open(new_file, 'w') do |file|
+  def initialize
+    @writer = ARGV[1]
+  end
+
+  def write(characters)
+  File.open(@writer, 'w') do |file|
      file.puts characters
    end
-   puts "Created '#{new_file}' countaining #{characters.length} characters."
+   puts "Created '#{@writer}' countaining #{characters.length} characters."
  end
 
 end

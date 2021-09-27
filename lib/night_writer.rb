@@ -9,7 +9,10 @@ class NightWriter
               :reader,
               :writer,
               :alphabet,
-              :braille
+              :braille,
+              :braille_char,
+              :char,
+              :format_characters
 
   def initialize
     @braille_alphabet = BrailleAlphabet.new
@@ -18,28 +21,54 @@ class NightWriter
   end
 
 
-  def file_creator
+
+  def print_translation
+    braille_chars = []
     characters = @reader.read
-    braille = translate_to_braille(characters)
-    @writer.write(braille)
+    characters.chars.each do |character|
+      braille_chars << translate_to_braille(character)
+    end
+    @writer.write(braille_chars)
   end
 
-  def translate_to_braille(characters)
-      characters.strip.downcase
+  # braille_chars.transpose.map {|row| row.join(" ")}.join("\n")
+
+
+
+
+
+  def translate_to_braille(character)
       braille_char = nil
       @braille_alphabet.alphabet.each do |char_key, array|
-        if characters == char_key
+        if character == char_key
           braille_char = @braille_alphabet.alphabet[char_key]
       end
     end
-    braille_char
+     braille_char
+    end
+
   end
 
-end
+
+
+
+    # braille_chars.each do
+    # braille_chars.first.join
+    # braille_chars.index(1).join
+    # braille_chars.last.join
 
 
 
 
 
 
-NightWriter.new.file_creator
+
+
+  # def line_split
+  #   if character.length > 80 /n
+  #   end
+
+
+
+
+NightWriter.new.print_translation

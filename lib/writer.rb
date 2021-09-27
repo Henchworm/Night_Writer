@@ -12,3 +12,9 @@ class Writer
  end
 
 end
+
+# def line_break(braille_char)
+#   if braille_char.length > 100
+#     braille_char.slice(-1).sub("\n")
+#   end
+end

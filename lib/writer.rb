@@ -1,15 +1,14 @@
 class Writer
-  attr_reader :writer
-
   def initialize
     @writer = ARGV[1]
+    @char_counter = File.new(ARGV[0]).read.length
   end
 
   def write(braille)
   File.open(@writer, 'w') do |file|
      file.puts braille
    end
-   puts "Created '#{@writer}' countaining #{braille.length} characters."
+   puts "Created '#{@writer}' containing #{@char_counter} characters."
  end
 
 end

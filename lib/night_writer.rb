@@ -3,16 +3,7 @@ require './lib/reader'
 require './lib/braille_alphabet'
 
 class NightWriter
-  attr_reader :input,
-              :output,
-              :braille_alphabet,
-              :reader,
-              :writer,
-              :alphabet,
-              :braille,
-              :braille_char,
-              :char,
-              :format_characters
+  attr_reader :braille_char
 
   def initialize
     @braille_alphabet = BrailleAlphabet.new
@@ -20,17 +11,14 @@ class NightWriter
     @writer = Writer.new
   end
 
-
-
   def print_translation
     braille_chars = []
     characters = @reader.read
     characters.chars.each do |character|
       braille_chars << translate_to_braille(character)
     end
-    @writer.write(braille_chars.transpose.map{|row| row.join(" ")}.join("\n"))
+    @writer.write(braille_chars.compact.transpose.map{|row| row.join(" ")}.join("\n"))
   end
-
 
   def translate_to_braille(character)
       braille_char = nil
@@ -42,11 +30,19 @@ class NightWriter
      braille_char
   end
 
+  # def line_breaks(braille_chars, max_length = 40 )
+  #   first = 0
+  #   last = 0
+
 
 
 
 
 end
+
+
+
+
 
 
 

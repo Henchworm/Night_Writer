@@ -28,13 +28,8 @@ class NightWriter
     characters.chars.each do |character|
       braille_chars << translate_to_braille(character)
     end
-    @writer.write(braille_chars)
+    @writer.write(braille_chars.transpose.map{|row| row.join(" ")}.join("\n"))
   end
-
-  # braille_chars.transpose.map {|row| row.join(" ")}.join("\n")
-
-
-
 
 
   def translate_to_braille(character)
@@ -45,28 +40,13 @@ class NightWriter
       end
     end
      braille_char
-    end
-
   end
 
 
 
 
-    # braille_chars.each do
-    # braille_chars.first.join
-    # braille_chars.index(1).join
-    # braille_chars.last.join
 
-
-
-
-
-
-
-
-  # def line_split
-  #   if character.length > 80 /n
-  #   end
+end
 
 
 

@@ -12,17 +12,24 @@ class NightWriter
     @writer = Writer.new
   end
 
-  def import_export_characters
+  def import_transform_characters
     braille_chars = []
     characters = @reader.read
     characters.chars.each do |character|
       braille_chars << translate_to_braille(character)
     end
-    @writer.write(braille_chars.compact.transpose.map{|row| row.join(" ")}.join("\n"))
+    line_format_and_print(braille_chars)
   end
 
-
-
+  def line_format_and_print(braille_chars)
+    nest_format = braille_chars.compact.transpose
+        joined = []
+        nest_format.each do |nest|
+          joined << nest.join
+        end
+      @writer.write(joined)
+  end
+  # @writer.write(braille_chars.compact.transpose.map{|row| row.join(" ")}.join("\n"))
   def translate_to_braille(character)
   braille_char = nil
   @braille_alphabet.alphabet.each do |char_key, array|
@@ -33,20 +40,21 @@ class NightWriter
     braille_char
   end
 
-  def line_formatter(braille_char)
-    # line_1 = braille_char
-    # if line_1[0].length > 80
-    #   line_2 = []
-    #   line_2 << braille_char[0][80..-1]
-    #   line_1[0].slice!(80..-1)
-    #   line_2 << line_1[1][80..-1]
-    #   braille_char[1].slice!(80..-1)
-    #   line_2 << braille_char[2][80..-1]
-    #   line_1[2].slice!(80..-1)
-    #   line_1.join("\n") + "\n" + line_2.join("\n")
-    #   else
-    #   braille_char.join("\n")
-    end
+#   def line_format_and_print(braille_chars)
+#     nest_format = braille_chars.compact.transpose
+#       nest_format.map do |n|
+#         if n.length > 3
+#           n.join.slice(5..-1)
+#         end
+#       end
+#       joined = []
+#       nest_format.each do |nest|
+#         joined << nest.join
+#       end
+#     @writer.write(joined)
+#     end
+#     require "pry"; binding.pry
+# end
 end
 
 
@@ -54,32 +62,10 @@ end
 
 # .compact.transpose.map{|row| row.join(" ")}.join("\n")
 
-NightWriter.new.import_export_characters
-
-
-#
-# require "pry"; binding.pry
-# line_2 = []
-# line_2 << braille_char[0][80..-1]
-# line[0].slice!(80..-1)
-# line_2 << line_1[1][80..-1]
-# braille_char[1].slice!(80..-1)
-# line_2 << braille_char[2][80..-1]
-# line_1[2].slice!(80..-1)
-# line_1.join("\n") + "\n" + line_2.join("\n")
-# else
-# braille_char.join("\n")
+NightWriter.new.import_transform_characters
 
 
 
-# another way? def translate_to_braille(character)
-#     braille_char = []
-#     row_1 = character.chars.map {|char| @braille_alphabet.alphabet[character][0]}
-#     braille_char << row_1.join
-#     row_2 = character.chars.map {|char| @braille_alphabet.alphabet[character][1]}
-#     braille_char << row_2.join
-#     row_3 = character.chars.map {|char| @braille_alphabet.alphabet[character][2]}
-#     braille_char << row_3.join
-#     require "pry"; binding.pry
-#   end
-# end
+
+
+

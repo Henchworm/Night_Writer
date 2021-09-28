@@ -8,8 +8,17 @@ class NightReader
     @characters = characters
   end
 
-  def read_write
+  def read
     characters = File.new(@input).read
+    translate_from_braille(characters)
+  end
+
+  def translate_from_braille(characters)
+    characters += "ahhhh"
+    write(characters)
+  end
+
+  def write(characters)
     File.open(@output, 'w') do |file|
        file.puts characters
       end
@@ -17,12 +26,10 @@ class NightReader
   end
 
 
-  # def write(characters)
-  #   File.open(characters, 'w') do |file|
-  #      file.puts @input
-  #     end
-  #    puts "Created '#{@output}' containing #{@input.length} characters."
-  # end
+
+
 end
 
-NightReader.new.read_write
+nightreader = NightReader.new
+nightreader.read
+nightreader.write

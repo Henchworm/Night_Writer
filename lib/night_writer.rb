@@ -46,6 +46,7 @@ class NightWriter
       @writer.write(formatted_line)
     end
 end
+
 NightWriter.new.import_transform_characters
 
 

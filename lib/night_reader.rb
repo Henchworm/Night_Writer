@@ -24,10 +24,6 @@ class NightReader
       end
      puts "Created '#{@output}' containing #{@input.length} characters."
   end
-
-
-
-
 end
 
 nightreader = NightReader.new

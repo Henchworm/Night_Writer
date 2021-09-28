@@ -22,14 +22,19 @@ class NightWriter
   end
 
   def line_format_and_print(braille_chars)
-    nest_format = braille_chars.compact.transpose
+    transpose_format = braille_chars.compact.transpose
         joined = []
-        nest_format.each do |nest|
-          joined << nest.join
+        transpose_format.each do |element|
+          joined << element.join
         end
-          joined << joined[0].slice!(80..-1)
-          joined << joined[1].slice!(80..-1)
-          joined << joined[2].slice!(80..-1)
+          joined.each do |element|
+            if element.length > 80
+              joined << element.slice!(80..-1)
+            end
+          end
+          # joined << joined[0].slice!(80..-1)
+          # joined << joined[1].slice!(80..-1)
+          # joined << joined[2].slice!(80..-1)
           formatted_line = joined
       @writer.write(formatted_line)
     end

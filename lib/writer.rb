@@ -7,7 +7,7 @@ class Writer
   def write(braille)
   File.open(@writer, 'w') do |file|
      file.puts braille
-   end
+    end
    puts "Created '#{@writer}' containing #{@char_counter} characters."
  end
 
@@ -17,4 +17,3 @@ end
 #   if braille_char.length > 100
 #     braille_char.slice(-1).sub("\n")
 #   end
-end

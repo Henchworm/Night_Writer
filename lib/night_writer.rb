@@ -27,8 +27,13 @@ class NightWriter
         nest_format.each do |nest|
           joined << nest.join
         end
+          joined[0].slice!(80..-1)
+          joined[1].slice!(80..-1)
+          joined[2].slice!(80..-1)
       @writer.write(joined)
-  end
+    end
+
+
   # @writer.write(braille_chars.compact.transpose.map{|row| row.join(" ")}.join("\n"))
   def translate_to_braille(character)
   braille_char = nil

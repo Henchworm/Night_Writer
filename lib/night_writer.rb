@@ -27,10 +27,12 @@ class NightWriter
         nest_format.each do |nest|
           joined << nest.join
         end
-          joined[0].slice!(80..-1)
-          joined[1].slice!(80..-1)
-          joined[2].slice!(80..-1)
-      @writer.write(joined)
+          remainder = []
+          remainder << joined[0].slice!(80..-1)
+          remainder << joined[1].slice!(80..-1)
+          remainder << joined[2].slice!(80..-1)
+          formatted_line = joined + remainder
+      @writer.write(formatted_line)
     end
 
 
